@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "TextViewController.h"
+#import "GlobalDefines.h"
 
 @interface ViewController ()
 
@@ -18,25 +19,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGRect bounds = [[UIScreen mainScreen] applicationFrame];
-    NSLog(@"BOUNDS %f %f %f %f", bounds.origin.x, bounds.origin.y, bounds.size.height, bounds.size.width);
-    NSLog(@"NAVIGATION CONTROLLER %f", self.navigationController.navigationBar.frame.size.height);
-	[self.navigationController.navigationBar setFrame:CGRectMake(self.navigationController.navigationBar.frame.origin.x,
-                                                                 self.navigationController.navigationBar.frame.origin.y,
-                                                                 self.navigationController.navigationBar.frame.size.width,
-                                                                 100)];
-    NSLog(@"NAVIGATION CONTROLLER %f", self.navigationController.navigationBar.frame.size.height);
-
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    
 }
 
--(void) viewWillAppear:(BOOL)animated
+-(void) viewDidAppear:(BOOL)animated
 {
+    //CGRect bounds = [[UIScreen mainScreen] applicationFrame];
     [self.navigationController.navigationBar setFrame:CGRectMake(self.navigationController.navigationBar.frame.origin.x,
                                                                  self.navigationController.navigationBar.frame.origin.y,
                                                                  self.navigationController.navigationBar.frame.size.width,
-                                                                 100)];
+                                                                 NAVIGATION_BAR_HEIGHT)];
+    //Set Title
+    NSDictionary *attributes= [NSDictionary dictionaryWithObjectsAndKeys:[UIColor darkGrayColor],NSForegroundColorAttributeName, [UIFont fontWithName:@"Arial" size:HEADER_FONT_SIZE],NSFontAttributeName, nil];
+
+    self.navigationController.navigationBar.titleTextAttributes = attributes;
+    self.navigationController.navigationBar.shadowImage = [UIImage imageNamed:@"Bg-Navbar-Shadow.png"];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -45,7 +45,7 @@
 
 - (IBAction)TextButtonPressed:(id)sender
 {
-    TextViewController *tvc = [[TextViewController alloc]initWithNibName:nil bundle:nil];
+    TextViewController *tvc = [[TextViewController alloc]initWithNibName:@"TextViewController" bundle:nil];
     [self.navigationController pushViewController:tvc animated:YES];
 }
 @end

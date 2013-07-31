@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TextFilterToolbar.h"
 
 @interface TextViewController : UIViewController
+{
+}
 
 @end
